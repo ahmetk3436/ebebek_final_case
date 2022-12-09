@@ -42,7 +42,7 @@ public class ProductPresentation implements IProductPresentation {
 				break;
 			case 4:
 				logger.info("------------------");
-				mobilePhone.ListProductsById();
+				mobilePhone.ListProductsByBrand();
 				logger.info("------------------");
 				notebook.ListProductsByBrand();
 				break;

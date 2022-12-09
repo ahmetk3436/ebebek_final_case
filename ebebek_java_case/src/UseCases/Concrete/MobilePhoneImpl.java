@@ -7,6 +7,7 @@ import java.util.TreeSet;
 import java.util.logging.Logger;
 
 import Entities.MobilePhone;
+import Entities.Notebook;
 import UseCases.Abstract.IProduct;
 
 public class MobilePhoneImpl extends MobilePhone implements IProduct{
@@ -34,9 +35,16 @@ public class MobilePhoneImpl extends MobilePhone implements IProduct{
 
 	@Override
 	public void Delete(int id) {
-		var productList = mobilePhoneProducts.toArray();
-		MobilePhone product = (MobilePhone) productList[id-1];
-		System.out.println(mobilePhoneProducts.remove(product));		
+		MobilePhone product;
+		for(MobilePhone item : mobilePhoneProducts)
+		{
+			if(item.id == id)
+			{
+			product = item;	
+			System.out.println(mobilePhoneProducts.remove(product));
+			break;
+			}
+		}		
 	}
 
 	@Override
@@ -52,16 +60,26 @@ public class MobilePhoneImpl extends MobilePhone implements IProduct{
 		for(var item : mobilePhoneProducts) {
 			mobilePhoneListById.add(item);
 		}
+		 String leftAlignFormat = "| %-2s | %-12s  | %-8f  | %-8f | %-8s | %-8d GB | %-8f | %-5d  | %-8s  | %-8d  |%n";
+	        String line = "+--------------------------------------------------------------------------------+%n";
+	        System.out.format(line);
+	        System.out.format("| ID | Ürün Adı     | Fiyat    | İndirim    | Marka    | Depolama    | Ekran    | RAM     | RENK   | BATARYA     |%n");
+	        System.out.format(line);
 		 for(MobilePhone phone : mobilePhoneListById){
-	         System.out.println(phone.name + " " + phone.unitPrice+ " " + phone.brandName);
-	     }		
+			   System.out.format(leftAlignFormat,phone.id,phone.name,phone.unitPrice,phone.discountRate,
+			            phone.brandName,phone.storage,phone.screenSize,phone.ram,phone.color,phone.batteryPower);	     }		
 	}
 
 	@Override
 	public void ListProductsByBrand() {
+		 String leftAlignFormat = "| %-2s | %-12s  | %-8f  | %-8f | %-8s | %-8d GB | %-8f | %-5d  | %-8s  | %-8d  |%n";
+	        String line = "+--------------------------------------------------------------------------------+%n";
+	        System.out.format(line);
+	        System.out.format("| ID | Ürün Adı     | Fiyat    | İndirim    | Marka    | Depolama    | Ekran    | RAM     | RENK   | BATARYA     |%n");
+	        System.out.format(line);
 		 for(MobilePhone phone : mobilePhoneProducts){
-	            System.out.println(phone.name + " " + phone.unitPrice);
-	        }  				
+			   System.out.format(leftAlignFormat,phone.id,phone.name,phone.unitPrice,phone.discountRate,
+			            phone.brandName,phone.storage,phone.screenSize,phone.ram,phone.color,phone.batteryPower);	        }  				
 	}
 	@Override
 	public int menu() {

@@ -37,9 +37,16 @@ public class NotebookImpl extends Notebook implements IProduct {
 
 	@Override
 	public void Delete(int id) {
-		var productList = notebookProducts.toArray();
-		Notebook product = (Notebook) productList[id-1];
-		System.out.println(notebookProducts.remove(product));
+		Notebook product;
+		for(Notebook item : notebookProducts)
+		{
+			if(item.id == id)
+			{
+			product = item;	
+			System.out.println(notebookProducts.remove(product));
+			break;
+			}
+		}
 	}
 
 	@Override
@@ -56,16 +63,26 @@ public class NotebookImpl extends Notebook implements IProduct {
 	for(var item : notebookProducts) {
 		notebookListById.add(item);
 	}
+	 String leftAlignFormat = "| %-2s | %-12s | %-8s TL | %-8s | %-8d GB | %-8f | %-5d GB | %-5f |%n";
+     String line = "+--------------------------------------------------------------------------------+%n";
+     System.out.format(line);
+     System.out.format("| ID | Ürün Adı     | Fiyat       | Marka    | Depolama    | Ekran    | RAM      | İndirim      |%n");
+     System.out.format(line);
 	 for(Notebook notebook : notebookListById){
-         System.out.println(notebook.name + " " + notebook.unitPrice+ " " + notebook.brandName);
-     }
+		   System.out.format(leftAlignFormat,notebook.id,notebook.name,notebook.unitPrice,
+		            notebook.brandName,notebook.storage,notebook.screenSize,notebook.ram,notebook.discountRate);	     }
 	}
 
 	@Override
 	public void ListProductsByBrand() {
+		 String leftAlignFormat = "| %-2s | %-12s | %-8s TL | %-8s | %-8d GB | %-8f | %-5d GB | %-5f |%n";
+	     String line = "+--------------------------------------------------------------------------------+%n";
+	     System.out.format(line);
+	     System.out.format("| ID | Ürün Adı     | Fiyat       | Marka    | Depolama    | Ekran    | RAM      | İndirim      |%n");
+	     System.out.format(line);
 		   for(Notebook notebook : notebookProducts){
-	            System.out.println(notebook.name + " " + notebook.unitPrice + " " + notebook.brandName);
-	        }  	
+			   System.out.format(leftAlignFormat,notebook.id,notebook.name,notebook.unitPrice,
+			            notebook.brandName,notebook.storage,notebook.screenSize,notebook.ram,notebook.discountRate);	 	        }  	
 		   }
 	@Override
 	public int menu() {
